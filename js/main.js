@@ -16,11 +16,10 @@ const pickUpRandomNumber = function (leftLimit,rightLimit) {
 pickUpRandomNumber (16,54);
 
 
-//The function bellow for random number have been taken from the MDN webside: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const givKeksobookingRandomNumber = function (leftLimit,rightLimit, numberOfSymbols) {
-  leftLimit = (Math.round(leftLimit + '1e+' +numberOfSymbols)/('1e+' + numberOfSymbols)); //Current formula rounding number with certain number of symbols after comma and prevente issue whith wrong rounding of number "1.005" (https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/round)
-  rightLimit = (Math.round(rightLimit + '1e+' +numberOfSymbols)/('1e+' + numberOfSymbols));
-  const RandomNumber = Math.floor (Math.random()*(rightLimit-leftLimit+1))+leftLimit;
+  leftLimit = (Math.round(leftLimit * Math.pow(10,numberOfSymbols))); //rounding according to the number of simbols after comma
+  rightLimit = (Math.round(rightLimit * Math.pow(10,numberOfSymbols)));
+  const RandomNumber = (Math.floor (Math.random()*(rightLimit-leftLimit+1))+leftLimit)/Math.pow(10,numberOfSymbols); // The function bellow for random non-integer number have been taken from the MDN webside with some small adjustments: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
   const restrictions = leftLimit >=0 && rightLimit>=0 && (typeof leftLimit === typeof rightLimit) && (typeof leftLimit=== 'number');
   if ( restrictions && rightLimit>=leftLimit ) {
     return RandomNumber;
@@ -32,4 +31,5 @@ const givKeksobookingRandomNumber = function (leftLimit,rightLimit, numberOfSymb
   }
   return 'You need to write numbers that shoud be greater or equalt to ziro! Please, reinter the interval';
 };
-givKeksobookingRandomNumber (14.2684165,875.147923,4);
+givKeksobookingRandomNumber (10.2654165,875.147923,2);
+
