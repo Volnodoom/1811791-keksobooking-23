@@ -11,9 +11,9 @@ const pickUpRandomNumber = function (leftLimit,rightLimit) {
     rightLimit = switchedNumber;
     return RandomNumber;
   }
-  return console.log ('The numbers shoud be greater or equalt to ziro! Please, reinter the interval');
+  return 'The numbers shoud be greater or equalt to ziro! Please, reinter the interval';
 };
-console.log(pickUpRandomNumber(1000,100));
+pickUpRandomNumber (16,54);
 
 
 //The function bellow for random number have been taken from the MDN webside: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -30,6 +30,6 @@ const givKeksobookingRandomNumber = function (leftLimit,rightLimit, numberOfSymb
     rightLimit = numberSwitch;
     return RandomNumber;
   }
-  return console.log ('You need to write numbers that shoud be greater or equalt to ziro! Please, reinter the interval');
+  return 'You need to write numbers that shoud be greater or equalt to ziro! Please, reinter the interval';
 };
-console.log(givKeksobookingRandomNumber(4.5845864,100.24896172841,3));
+givKeksobookingRandomNumber (14.2684165,875.147923,4);
