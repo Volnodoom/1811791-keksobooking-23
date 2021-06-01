@@ -13,7 +13,7 @@ const pickUpRandomNumber = function (leftLimit,rightLimit) {
 pickUpRandomNumber (16,54);
 
 
-const giveKeksobookingRandomNumber = function (leftLimit,rightLimit,numberOfSymbols) {
+const getKeksobookingRandomNumber = function (leftLimit,rightLimit,numberOfSymbols) {
   leftLimit = (Math.round(leftLimit * Math.pow(10,numberOfSymbols)));
   rightLimit = (Math.round(rightLimit * Math.pow(10,numberOfSymbols)));
   const randomness = Math.random() * (rightLimit - leftLimit + 1);
@@ -26,5 +26,5 @@ const giveKeksobookingRandomNumber = function (leftLimit,rightLimit,numberOfSymb
   }
   return (` You need to write numbers that should be greater or equal to zero! Please, reinter the interval. \n Remind you to put number of symbols you want to see after comma, current number is ${  numberOfSymbols}`);
 };
-giveKeksobookingRandomNumber (1000.2654165,875.147923,2);
+getKeksobookingRandomNumber (1000.2654165,875.147923,2);
 
