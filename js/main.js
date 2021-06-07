@@ -1,17 +1,13 @@
-//The function bellow for random integer number have been taken from the MDN website: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-const pickUpRandomNumber = function (leftLimit,rightLimit) {
-  leftLimit = Math.ceil (leftLimit);
-  rightLimit = Math.floor (rightLimit);
-  const randomNumber = Math.floor(Math.random() * (rightLimit - leftLimit + 1)) + leftLimit;
-  if (leftLimit >= 0 && rightLimit >= 0 && rightLimit >= leftLimit) {
-    return randomNumber;
-  } else if (leftLimit >=0 && rightLimit >= 0 && rightLimit < leftLimit) {
-    return ('First value (limit) should be greater then second value (limit).');
-  }
-  return 'The numbers should be greater or equal to zero! Please, reinter the interval';
-};
-pickUpRandomNumber (16,54);
+// Функция взята из интернета и доработана
+// Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
+function getRandomPositiveInteger (valuA, valueB) {
+  const lower = Math.ceil(Math.min(Math.abs(valuA), Math.abs(valueB)));
+  const upper = Math.floor(Math.max(Math.abs(valuA), Math.abs(valueB)));
+  const result = Math.random() * (upper - lower + 1) + lower;
+  return Math.floor(result);
+}
+getRandomPositiveInteger (2,57);
 
 const getKeksobookingRandomNumber = function (leftLimit,rightLimit,numberOfSymbols) {
   leftLimit = (Math.round(leftLimit * Math.pow(10,numberOfSymbols)));
