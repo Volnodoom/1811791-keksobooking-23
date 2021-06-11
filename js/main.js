@@ -23,11 +23,15 @@ getRandomPositiveFloat (0.4456443,874.78526234,5);
 goal is create massive with 10 generated JS-OBJECTS
 
 author, объект — описывает автора. Содержит одно поле:
-avatar, строка — адрес изображения вида img/avatars/user{{xx}}.png, где {{xx}} — это число от 1 до 8 с ведущим нулём. Например, 01, 02 и т. д. Адреса изображений не повторяются.
+avatar, строка — адрес изображения вида img/avatars/user{{xx}}.png, где {{xx}} — это число от 1 до 8 с ведущим нулём.
+Например, 01, 02 и т. д. Адреса изображений не повторяются.
 
 offer, объект — содержит информацию об объявлении. Состоит из полей:
 title, строка — заголовок предложения. Придумайте самостоятельно.
-address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по маске {{location.x}}, {{location.y}}.
+
+address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по
+маске {{location.x}}, {{location.y}}.
+
 price, число — стоимость. Случайное целое положительное число.
 type, строка — одно из пяти фиксированных значений: palace, flat, house, bungalow или hotel.
 rooms, число — количество комнат. Случайное целое положительное число.
@@ -42,37 +46,48 @@ lat, число с плавающей точкой — широта, случа�
 lng, число с плавающей точкой — долгота, случайное значение от 139.70000 до 139.80000
 */
 
-/*const temptData = [];
 
-const author = {
-avatar: /img/avatars/user{{xx}}.png
+const makeMassiveForAvatarka = function(numberA = 1, numberB = 8) {
+  numberA = Math.abs(numberA);
+  numberB = Math.abs(numberB);
+  if ((numberB === 0) || (numberA === 0)) {
+    return 'Please, place the Integer number greater than 0';}
+  const uslessMassive = new Array (numberB-numberA + 1).fill('');
+  for (let i = 0; i<uslessMassive.length; i++) {
+    uslessMassive[i] = numberA + i;
+  }
+  return uslessMassive;
 };
-typeof arr != "undefined" && arr != null && arr.length > 0
-*/
-let massiveForAvatarka = [];
-if ((massiveForAvatarka === [] )||(massiveForAvatarka.length === 0) ) {
-  const makeMassiveForAvatarka = function(numberA = 1, numberB = 8) {
-    numberA = Math.abs(numberA);
-    numberB = Math.abs(numberB);
-    if ((numberB === 0) || (numberA === 0)) {
-      return 'Please, place the Integer number greater than 0';}
-    const uslessMassive = new Array (numberB-numberA + 1).fill('');
-    for (let i = 0; i<uslessMassive.length; i++) {
-      uslessMassive[i] = numberA + i;
-    }
-    return uslessMassive;
-  };
-  massiveForAvatarka = makeMassiveForAvatarka();
-} else {
-  const numberC = 1;
-  let randomIndexForAvatarka = getRandomPositiveInteger (numberC,massiveForAvatarka.length);
-  let randomNumberFromMassive = massiveForAvatarka [randomIndexForAvatarka];
-  let removeElementFromMassive = massiveForAvatarka.splice (randomIndexForAvatarka,1);
-  console.log(randomNumberFromMassive);
-}
-//console.log(massiveForAvatarka);
+const getRandomItemNoRepeat = function (arrayData = makeMassiveForAvatarka()) {
+  const randomIndexForAvatarka = getRandomPositiveInteger (0,arrayData.length-1);
+  const randomNumberFromMassive = arrayData [randomIndexForAvatarka];
+  arrayData.splice (randomIndexForAvatarka,1);
+  return randomNumberFromMassive;
+};
 
-/*const randomNumberAvatar = ;
+console.log (getRandomItemNoRepeat(2,5));
 
-const vedushiyNol = '0' + randomNumberAvatar;
+
+
+/*
+address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по
+маске {{location.x}}, {{location.y}}.
 */
+
+
+/*
+const author = {
+  avatar:`/img/avatars/user0${getRandomItemNoRepeat()}.png`,
+};
+const offer = {
+  title: 'Доступные предложения',
+  address
+};
+const  = {
+
+};
+
+const temptData = [
+author,
+offer,
+];
