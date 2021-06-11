@@ -7,7 +7,6 @@ function getRandomPositiveInteger (valueA, valueB) {
   const result = Math.random() * (upper - lower + 1) + lower;
   return Math.floor(result);
 }
-getRandomPositiveInteger (2,57);
 
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
@@ -48,25 +47,30 @@ lng, число с плавающей точкой — долгота, случ�
 const author = {
 avatar: /img/avatars/user{{xx}}.png
 };
+typeof arr != "undefined" && arr != null && arr.length > 0
 */
-
-const makeMassiveForAvatarka = function(numberA = 1, numberB = 8) {
-  numberA = Math.abs(numberA);
-  numberB = Math.abs(numberB);
-  if ((numberB === 0) || (numberA === 0)) {
-    return 'Please, place the Integer number greater than 0'
+let massiveForAvatarka = [];
+if ((massiveForAvatarka === [] )||(massiveForAvatarka.length === 0) ) {
+  const makeMassiveForAvatarka = function(numberA = 1, numberB = 8) {
+    numberA = Math.abs(numberA);
+    numberB = Math.abs(numberB);
+    if ((numberB === 0) || (numberA === 0)) {
+      return 'Please, place the Integer number greater than 0';}
+    const uslessMassive = new Array (numberB-numberA + 1).fill('');
+    for (let i = 0; i<uslessMassive.length; i++) {
+      uslessMassive[i] = numberA + i;
+    }
+    return uslessMassive;
   };
-  const uslessMassive = new Array (numberB-numberA + 1).fill('')
-  for (i = 0; i<uslessMassive.length; i++) {
-    uslessMassive[i] = numberA + i;
-  };
-  return uslessMassive;
-};
-
-
-
-
-console.log(makeMassiveForAvatarka(3,26));
+  massiveForAvatarka = makeMassiveForAvatarka();
+} else {
+  const numberC = 1;
+  let randomIndexForAvatarka = getRandomPositiveInteger (numberC,massiveForAvatarka.length);
+  let randomNumberFromMassive = massiveForAvatarka [randomIndexForAvatarka];
+  let removeElementFromMassive = massiveForAvatarka.splice (randomIndexForAvatarka,1);
+  console.log(randomNumberFromMassive);
+}
+//console.log(massiveForAvatarka);
 
 /*const randomNumberAvatar = ;
 
