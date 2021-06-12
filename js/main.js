@@ -83,15 +83,18 @@ const getRandomItemRepeat = function (arrayData) {
   return arrayData[randomIndex];
 };
 
+const checkInTime = [
+  '12:00',
+  '13:00',
+  '14:00',
+];
 
 console.log (getRandomItemNoRepeat(2,5));
 
 
 
 /*
-rooms, число — количество комнат. Случайное целое положительное число.
-guests, число — количество гостей, которое можно разместить. Случайное целое положительное число.
-checkin, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+
 */
 
 
@@ -106,6 +109,8 @@ const offer = {
   type: getRandomItemRepeat(typeOfAppartments),
   rooms: getRandomPositiveInteger(1,5),
   guests: getRandomPositiveInteger(1,10),
+  checkin: getRandomItemRepeat(checkInTime),
+
 };
 
 
