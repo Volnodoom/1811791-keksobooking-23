@@ -65,23 +65,26 @@ const getRandomItemNoRepeat = function (arrayData = makeMassiveForAvatarka()) {
   return randomNumberFromMassive;
 };
 
+const MoscowX = 55.7558;
+const MoscowY = 37.6173;
+
 console.log (getRandomItemNoRepeat(2,5));
 
 
 
 /*
-address, строка — адрес предложения. Для простоты пусть пока составляется из географических координат по
-маске {{location.x}}, {{location.y}}.
+
 */
 
 
-/*
+
 const author = {
   avatar:`/img/avatars/user0${getRandomItemNoRepeat()}.png`,
 };
 const offer = {
   title: 'Доступные предложения',
-  address
+  address: MoscowX, MoscowY,
+
 };
 const  = {
 
