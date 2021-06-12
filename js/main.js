@@ -70,13 +70,25 @@ const getRandomItemNoRepeat = function (arrayData = makeMassiveForAvatarka()) {
 const MoscowX = 55.7558;
 const MoscowY = 37.6173;
 
+const typeOfAppartments = [
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+  'hotel',
+];
+
+const getRandomItemRepeat = function (arrayData) {
+  const randomIndex = getRandomPositiveInteger (0, arrayData.length - 1);
+  return arrayData[randomIndex];
+};
+
+
 console.log (getRandomItemNoRepeat(2,5));
 
 
 
 /*
-price, число — стоимость. Случайное целое положительное число.
-type, строка — одно из пяти фиксированных значений: palace, flat, house, bungalow или hotel.
 rooms, число — количество комнат. Случайное целое положительное число.
 guests, число — количество гостей, которое можно разместить. Случайное целое положительное число.
 checkin, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
@@ -91,13 +103,11 @@ const offer = {
   title: 'Доступные предложения',
   address: MoscowX, MoscowY,
   price: getRandomPositiveInteger(500,20000),
-
+  type: getRandomItemRepeat(typeOfAppartments),
 };
-const  = {
 
-};
 
 const temptData = [
-author,
-offer,
+  author,
+  offer,
 ];
