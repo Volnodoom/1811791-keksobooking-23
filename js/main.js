@@ -104,6 +104,7 @@ const offer = {
   address: MoscowX, MoscowY,
   price: getRandomPositiveInteger(500,20000),
   type: getRandomItemRepeat(typeOfAppartments),
+  rooms: getRandomPositiveInteger(1,5),
 };
 
 
