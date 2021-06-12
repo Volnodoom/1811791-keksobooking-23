@@ -91,16 +91,20 @@ const checkInTime = [
 
 const checkOutTime = checkInTime;
 
+cosnt FeaturesOfAppartment =[
+  'wifi',
+  'dishwasher',
+  'parking',
+  'washer',
+  'elevator',
+  'conditioner',
+];
 
 console.log (getRandomItemNoRepeat(2,5));
 
 
 
 /*
-checkout, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
-features, массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer,
-elevator, conditioner. Значения не должны повторяться.
-
 description, строка — описание помещения. Придумайте самостоятельно.
 
 photos, массив строк — массив случайной длины из значений:
@@ -124,6 +128,8 @@ const offer = {
   guests: getRandomPositiveInteger(1,10),
   checkin: getRandomItemRepeat(checkInTime),
   checkout: getRandomItemRepeat(checkOutTime),
+  features: getRandomItemNoRepeat(FeaturesOfAppartment),
+
 
 };
 
