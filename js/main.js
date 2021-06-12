@@ -89,11 +89,24 @@ const checkInTime = [
   '14:00',
 ];
 
+const checkOutTime = checkInTime;
+
+
 console.log (getRandomItemNoRepeat(2,5));
 
 
 
 /*
+checkout, строка — одно из трёх фиксированных значений: 12:00, 13:00 или 14:00.
+features, массив строк — массив случайной длины из значений: wifi, dishwasher, parking, washer,
+elevator, conditioner. Значения не должны повторяться.
+
+description, строка — описание помещения. Придумайте самостоятельно.
+
+photos, массив строк — массив случайной длины из значений:
+https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg,
+ https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg,
+ https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg.
 
 */
 
@@ -110,6 +123,7 @@ const offer = {
   rooms: getRandomPositiveInteger(1,5),
   guests: getRandomPositiveInteger(1,10),
   checkin: getRandomItemRepeat(checkInTime),
+  checkout: getRandomItemRepeat(checkOutTime),
 
 };
 
