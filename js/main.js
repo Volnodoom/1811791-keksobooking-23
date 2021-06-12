@@ -105,6 +105,7 @@ const offer = {
   price: getRandomPositiveInteger(500,20000),
   type: getRandomItemRepeat(typeOfAppartments),
   rooms: getRandomPositiveInteger(1,5),
+  guests: getRandomPositiveInteger(1,10),
 };
 
 
