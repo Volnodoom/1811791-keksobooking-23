@@ -33,8 +33,8 @@ const makeMassiveForAvatarka = function(numberA = 1, numberB = 8) {
   if ((numberB === 0) || (numberA === 0)) {
     return 'Please, place the Integer number greater than 0';}
   const massive = new Array (numberB-numberA + 1).fill('');
-  for (let i = 0; i<massive.length; i++) {
-    massive[i] = numberA + i;
+  for (let ind = 0; ind<massive.length; ind++) {
+    massive[ind] = numberA + ind;
   }
   return massive;
 };
