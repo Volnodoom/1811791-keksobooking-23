@@ -100,6 +100,11 @@ cosnt FeaturesOfAppartment =[
   'conditioner',
 ];
 
+const photosData = [
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
+  'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
+]
 console.log (getRandomItemNoRepeat(2,5));
 
 
@@ -129,8 +134,8 @@ const offer = {
   checkin: getRandomItemRepeat(checkInTime),
   checkout: getRandomItemRepeat(checkOutTime),
   features: getRandomItemNoRepeat(FeaturesOfAppartment),
-
-
+  description: 'You are checking one of the greatest appartments on our market /n you could enjoy pleasure of your life here /n with appropriate badget and level of comfort',
+  photos: getRandomItemRepeat(photosData),
 };
 
 
