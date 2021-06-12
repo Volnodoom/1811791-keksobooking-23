@@ -91,7 +91,7 @@ const checkInTime = [
 
 const checkOutTime = checkInTime;
 
-cosnt FeaturesOfAppartment =[
+const FeaturesOfAppartment =[
   'wifi',
   'dishwasher',
   'parking',
@@ -104,7 +104,7 @@ const photosData = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
-]
+];
 console.log (getRandomItemNoRepeat(2,5));
 
 
