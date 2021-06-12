@@ -110,12 +110,6 @@ console.log (getRandomItemNoRepeat(2,5));
 
 
 /*
-description, строка — описание помещения. Придумайте самостоятельно.
-
-photos, массив строк — массив случайной длины из значений:
-https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg,
- https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg,
- https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg.
 
 */
 
@@ -126,7 +120,7 @@ const author = {
 };
 const offer = {
   title: 'Доступные предложения',
-  address: MoscowX, MoscowY,
+  address: [MoscowX, MoscowY],
   price: getRandomPositiveInteger(500,20000),
   type: getRandomItemRepeat(typeOfAppartments),
   rooms: getRandomPositiveInteger(1,5),
