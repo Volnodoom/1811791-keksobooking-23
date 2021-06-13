@@ -1,16 +1,19 @@
-const TYPE_OF_APARTMENT_KEKS = [
+const NUMBER_OF_AVATARS = 8;
+const TITLE = 'Available offers';
+const DESCRIPTION = 'You are checking one of the greatest apartment on our market \n you could enjoy pleasure of your life here \n with appropriate budget and level of comfort';
+const TYPE_OF_APARTMENT = [
   'palace',
   'flat',
   'house',
   'bungalow',
   'hotel',
 ];
-const TIMES_KEKS = [
+const TIMES = [
   '12:00',
   '13:00',
   '14:00',
 ];
-const FEATURES_OF_APARTMENT_KEKS =[
+const FEATURES_OF_APARTMENT =[
   'WiFi',
   'dishwasher',
   'parking',
@@ -18,7 +21,7 @@ const FEATURES_OF_APARTMENT_KEKS =[
   'elevator',
   'conditioner',
 ];
-const PHOTOS_DATA_KEKS = [
+const PHOTOS_DATA = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
@@ -27,7 +30,7 @@ const PHOTOS_DATA_KEKS = [
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
-const getRandomPositiveIntegerKeks = function (valueA, valueB) {
+const getRandomPositiveInteger = function (valueA, valueB) {
   const lower = Math.ceil (Math.min (Math.abs (valueA), Math.abs (valueB)));
   const upper = Math.floor (Math.max (Math.abs (valueA), Math.abs (valueB)));
   const result = Math.random () * (upper - lower + 1) + lower;
@@ -37,75 +40,64 @@ const getRandomPositiveIntegerKeks = function (valueA, valueB) {
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
 
-const getRandomPositiveFloatKeks = function (valueA, valueB, digits = 1) {
+const getRandomPositiveFloat = function (valueA, valueB, digits = 1) {
   const lower = Math.min (Math.abs(valueA), Math.abs(valueB));
   const upper = Math.max (Math.abs(valueA), Math.abs(valueB));
   const result = Math.random () * (upper - lower) + lower;
   return result.toFixed (digits);
 };
 
-const getRandomItemNoRepeatKeks = function (arrayData) {
-  const randomIndex = getRandomPositiveIntegerKeks (0, arrayData.length - 1);
-  const randomDataFromMassive = arrayData [randomIndex];
-  arrayData.splice (randomIndex, 1);
-  return randomDataFromMassive;
+let start = 1;
+const arrayWithIncreasingNumbers = [];
+const refreshEmptyArray = function () {
+  while (start <= NUMBER_OF_AVATARS) {
+    arrayWithIncreasingNumbers.push(start++);
+  }
 };
 
-const getRandomItemRepeatKeks = function (arrayData) {
-  const randomIndex = getRandomPositiveIntegerKeks (0, arrayData.length - 1);
+const getRandomItemNoRepeat = function (arrayData) {
+  const randomIndex = getRandomPositiveInteger (0, arrayData.length - 1);
+  const randomDataFromArray = arrayData [randomIndex];
+  arrayData.splice (randomIndex, 1);
+  return randomDataFromArray;
+};
+
+const getRandomItemRepeat = function (arrayData) {
+  const randomIndex = getRandomPositiveInteger (0, arrayData.length - 1);
   return arrayData[randomIndex];
 };
 
-const makeArrayWithIncreasingNumbers = function(numberA = 1, numberB = 8) {
-  numberA = Math.abs(numberA);
-  numberB = Math.abs(numberB);
-  if ((numberB === 0) || (numberA === 0)) {
-    return 'Please, place the Integer number greater than 0';}
-  const massive = new Array (numberB-numberA + 1).fill('');
-  for (let ind = 0; ind<massive.length; ind++) {
-    massive[ind] = numberA + ind;
+const creatAvailableApartment = function () {
+  const LAT = getRandomPositiveFloat (35.65000, 35.70000,5);
+  const LNG = getRandomPositiveFloat (139.70000,139.80000,5);
+  if (arrayWithIncreasingNumbers.length === 0) {
+    start = 1;
+    refreshEmptyArray();
   }
-  return massive;
+  return {
+    author : {
+      avatar:`/img/avatars/user0${getRandomItemNoRepeat(arrayWithIncreasingNumbers)}.png`,
+    },
+
+    offer : {
+      title: TITLE,
+      address: `${LAT} , ${LNG}`,
+      price: getRandomPositiveInteger (500, 20000),
+      type: getRandomItemRepeat (TYPE_OF_APARTMENT),
+      rooms: getRandomPositiveInteger (1, 5),
+      guests: getRandomPositiveInteger (1, 10),
+      checkin: getRandomItemRepeat (TIMES),
+      checkout: getRandomItemRepeat (TIMES),
+      features: getRandomItemNoRepeat (FEATURES_OF_APARTMENT),
+      description: DESCRIPTION,
+      photos: getRandomItemRepeat (PHOTOS_DATA),
+    },
+
+    location : {
+      lat: LAT,
+      lng: LNG,
+    },
+  };
 };
-
-const authorKeks = {
-  avatar:`/img/avatars/user0${getRandomItemNoRepeatKeks(makeArrayWithIncreasingNumbers())}.png`,
-};
-
-const locationKeks = {
-  lat: getRandomPositiveFloatKeks(35.65000, 35.70000,5),
-  lng: getRandomPositiveFloatKeks (139.70000,139.80000,5),
-};
-
-const offer = {
-  title: 'Доступные предложения',
-  address: `${locationKeks.lat} , ${locationKeks.lng}`,
-  price: getRandomPositiveIntegerKeks(500, 20000),
-  type: getRandomItemRepeatKeks(TYPE_OF_APARTMENT_KEKS),
-  rooms: getRandomPositiveIntegerKeks(1, 5),
-  guests: getRandomPositiveIntegerKeks(1, 10),
-  checkin: getRandomItemRepeatKeks(TIMES_KEKS),
-  checkout: getRandomItemRepeatKeks(TIMES_KEKS),
-  features: getRandomItemNoRepeatKeks(FEATURES_OF_APARTMENT_KEKS),
-  description: 'You are checking one of the greatest apartment on our market \n you could enjoy pleasure of your life here \n with appropriate budget and level of comfort',
-  photos: getRandomItemRepeatKeks(PHOTOS_DATA_KEKS),
-};
-
-const temptDataVer1 = [
-  authorKeks,
-  offer,
-];
-
-const temptDataVer2 = [
-  {avatar:`/img/avatars/user0${getRandomItemNoRepeatKeks(makeArrayWithIncreasingNumbers())}.png`},
-  {address: `${locationKeks.lat} , ${locationKeks.lng}`},
-  {price: getRandomPositiveIntegerKeks(500, 20000)},
-  {type: getRandomItemRepeatKeks(TYPE_OF_APARTMENT_KEKS)},
-  {rooms: getRandomPositiveIntegerKeks(1, 5)},
-  {guests: getRandomPositiveIntegerKeks(1, 10)},
-  {checkin: getRandomItemRepeatKeks(TIMES_KEKS)},
-  {checkout: getRandomItemRepeatKeks(TIMES_KEKS)},
-  {features: getRandomItemNoRepeatKeks(FEATURES_OF_APARTMENT_KEKS)},
-  {photos: getRandomItemRepeatKeks(PHOTOS_DATA_KEKS)},
-];
-
+const temptArrayOf10 = new Array (10).fill().map(() => creatAvailableApartment());
+temptArrayOf10;
