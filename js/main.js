@@ -111,9 +111,8 @@ const creatAvailableApartment = function () {
       lat: LAT,
       lng: LNG,
     },
-    feature: console.log(getRandomLength (FEATURES_OF_APARTMENT)),
   };
 };
 const temptArrayOf10 = new Array (10).fill().map(() => creatAvailableApartment());
-console.log(temptArrayOf10);
+temptArrayOf10;
 
