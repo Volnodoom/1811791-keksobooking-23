@@ -71,8 +71,12 @@ const getRandomItemRepeat = function (arrayData) {
 };
 
 const getRandomLength = function (array) {
-  const randomNumber1 = getRandomPositiveInteger (0,(array.length - 1));
-  const randomNumber2 = getRandomPositiveInteger (1,(array.length));
+  let randomNumber1 = getRandomPositiveInteger (0,(array.length - 1));
+  let randomNumber2 = getRandomPositiveInteger (1,(array.length));
+  while (randomNumber1 === randomNumber2) {
+    randomNumber1 = getRandomPositiveInteger (0,(array.length - 1));
+    randomNumber2 = getRandomPositiveInteger (1,(array.length));
+  }
   const min = Math.min (randomNumber1,randomNumber2);
   const max = Math.max (randomNumber1, randomNumber2);
   return array.slice(min,max);
@@ -114,5 +118,6 @@ const creatAvailableApartment = function () {
   };
 };
 const temptArrayOf10 = new Array (10).fill().map(() => creatAvailableApartment());
+
 temptArrayOf10;
 
