@@ -1,4 +1,4 @@
-const NUMBER_OF_AVATARS = 8;
+const NUMBER_OF_AVATARS = 10;
 const TITLE = 'Available offers';
 const DESCRIPTION = 'You are checking one of the greatest apartment on our market \n you could enjoy pleasure of your life here \n with appropriate budget and level of comfort';
 const TYPE_OF_APARTMENT = [
@@ -48,12 +48,15 @@ const getRandomPositiveFloat = function (valueA, valueB, digits = 1) {
 };
 
 let start = 1;
-const arrayWithIncreasingNumbers = [];
-const refreshEmptyArray = function () {
-  while (start <= NUMBER_OF_AVATARS) {
-    arrayWithIncreasingNumbers.push(start++);
+const refreshEmptyArray = function (array,arrayLength) {
+  while (start <= arrayLength) {
+    array.push(start++);
   }
 };
+
+const arrayWithIncreasingNumbers = [];
+refreshEmptyArray(arrayWithIncreasingNumbers,NUMBER_OF_AVATARS);
+
 
 const getRandomItemNoRepeat = function (arrayData) {
   const randomIndex = getRandomPositiveInteger (0, arrayData.length - 1);
@@ -67,16 +70,27 @@ const getRandomItemRepeat = function (arrayData) {
   return arrayData[randomIndex];
 };
 
+const getRandomLength = function (array) {
+  const randomNumber1 = getRandomPositiveInteger (0,(array.length - 1));
+  const randomNumber2 = getRandomPositiveInteger (1,(array.length));
+  const min = Math.min (randomNumber1,randomNumber2);
+  const max = Math.max (randomNumber1, randomNumber2);
+  return array.slice(min,max);
+};
+
+const getRandomNumberUnderCondition = function (randomNumber){
+  if (randomNumber >=10) {
+    return `img/avatars/user${randomNumber}.png`;
+  } return `img/avatars/user0${randomNumber}.png`;
+};
+
 const creatAvailableApartment = function () {
   const LAT = getRandomPositiveFloat (35.65000, 35.70000,5);
   const LNG = getRandomPositiveFloat (139.70000,139.80000,5);
-  if (arrayWithIncreasingNumbers.length === 0) {
-    start = 1;
-    refreshEmptyArray();
-  }
+
   return {
     author : {
-      avatar:`/img/avatars/user0${getRandomItemNoRepeat(arrayWithIncreasingNumbers)}.png`,
+      avatar:getRandomNumberUnderCondition(getRandomItemNoRepeat(arrayWithIncreasingNumbers)),
     },
 
     offer : {
@@ -88,7 +102,7 @@ const creatAvailableApartment = function () {
       guests: getRandomPositiveInteger (1, 10),
       checkin: getRandomItemRepeat (TIMES),
       checkout: getRandomItemRepeat (TIMES),
-      features: getRandomItemNoRepeat (FEATURES_OF_APARTMENT),
+      features: getRandomLength (FEATURES_OF_APARTMENT),
       description: DESCRIPTION,
       photos: getRandomItemRepeat (PHOTOS_DATA),
     },
@@ -97,7 +111,9 @@ const creatAvailableApartment = function () {
       lat: LAT,
       lng: LNG,
     },
+    feature: console.log(getRandomLength (FEATURES_OF_APARTMENT)),
   };
 };
 const temptArrayOf10 = new Array (10).fill().map(() => creatAvailableApartment());
-temptArrayOf10;
+console.log(temptArrayOf10);
+
