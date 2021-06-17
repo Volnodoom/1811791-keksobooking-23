@@ -1,3 +1,4 @@
+import getRandomPositiveInteger from './get-random-positive-integer';
 const getRandomItemNoRepeat = function (arrayData) {
   const randomIndex = getRandomPositiveInteger (0, arrayData.length - 1);
   const randomDataFromArray = arrayData [randomIndex];
