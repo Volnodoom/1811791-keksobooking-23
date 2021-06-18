@@ -1,3 +1,5 @@
+import {getRandomPositiveFloat} from './get-random.js';
+
 const NUMBER_OF_AVATARS = 10;
 const NUMBER_WITHOUT_ZERO = 9;
 const TITLE = 'Available offers';
@@ -28,4 +30,7 @@ const PHOTOS_DATA = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
 ];
 
-export {NUMBER_OF_AVATARS,NUMBER_WITHOUT_ZERO,TITLE,DESCRIPTION,TYPE_OF_APARTMENT,TIMES,FEATURES_OF_APARTMENT,PHOTOS_DATA};
+const LAT = getRandomPositiveFloat (35.65000, 35.70000,5);
+const LNG = getRandomPositiveFloat (139.70000,139.80000,5);
+
+export {NUMBER_OF_AVATARS,NUMBER_WITHOUT_ZERO,TITLE,DESCRIPTION,TYPE_OF_APARTMENT,TIMES,FEATURES_OF_APARTMENT,PHOTOS_DATA, LAT, LNG};
