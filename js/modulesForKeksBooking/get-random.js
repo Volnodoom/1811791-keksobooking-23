@@ -45,7 +45,7 @@ const arrayWithIncreasingNumbers = [];
 refreshEmptyArray(arrayWithIncreasingNumbers,NUMBER_OF_AVATARS);
 
 const getRandomAvatar = function (){
-  const randomNumber = getRandomItemNoRepeat (arrayWithIncreasingNumbers)
+  const randomNumber = getRandomItemNoRepeat (arrayWithIncreasingNumbers);
   if (randomNumber > NUMBER_WITHOUT_ZERO) {
     return `img/avatars/user${randomNumber}.png`;
   } return `img/avatars/user0${randomNumber}.png`;
