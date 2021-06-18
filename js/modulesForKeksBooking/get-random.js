@@ -63,5 +63,5 @@ const getRandomLength = function (array) {
   return array.slice(min,max);
 };
 
-export {getRandomLength, getRandomAvatar, getRandomItemRepeat, getRandomPositiveInteger, getRandomPositiveFloat};
+export {getRandomLength, getRandomAvatar, getRandomItemRepeat, getRandomPositiveInteger};
 
