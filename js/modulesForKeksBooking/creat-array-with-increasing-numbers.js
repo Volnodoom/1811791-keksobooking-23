@@ -1,4 +1,5 @@
 import NUMBER_OF_AVATARS from './library';
+
 let start = 1;
 const refreshEmptyArray = function (array,arrayLength) {
   while (start <= arrayLength) {
@@ -8,4 +9,5 @@ const refreshEmptyArray = function (array,arrayLength) {
 
 const arrayWithIncreasingNumbers = [];
 refreshEmptyArray(arrayWithIncreasingNumbers,NUMBER_OF_AVATARS);
-export {refreshEmptyArray};
+
+export {arrayWithIncreasingNumbers};
