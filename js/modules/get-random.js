@@ -1,5 +1,5 @@
-import {NUMBER_WITHOUT_ZERO} from './library.js';
-import {NUMBER_OF_AVATARS} from './library.js';
+import {NUMBER_WITHOUT_ZERO} from './data.js';
+import {NUMBER_OF_AVATARS} from './data.js';
 
 // Функция взята из интернета и доработана
 // Источник - https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_random
