@@ -1,6 +1,6 @@
-import {TITLE, TYPE_OF_APARTMENT, TIMES, FEATURES_OF_APARTMENT, DESCRIPTION, PHOTOS_DATA} from './modulesForKeksBooking/library.js';
-import {getRandomAvatar, getRandomPositiveInteger, getRandomItemRepeat, getRandomLength} from './modulesForKeksBooking/get-random.js';
-import {LAT, LNG} from './modulesForKeksBooking/location-lat-lng.js';
+import {TITLE, TYPE_OF_APARTMENT, TIMES, FEATURES_OF_APARTMENT, DESCRIPTION, PHOTOS_DATA} from './modules/data.js';
+import {getRandomAvatar, getRandomPositiveInteger, getRandomItemRepeat, getRandomLength} from './modules/get-random.js';
+import {LAT, LNG} from './modules/location-lat-lng.js';
 
 const creatAvailableApartment = function () {
   LAT;
