@@ -15,7 +15,7 @@ const TIMES = [
   '14:00',
 ];
 const FEATURES_OF_APARTMENT =[
-  'WiFi',
+  'wifi',
   'dishwasher',
   'parking',
   'washer',
