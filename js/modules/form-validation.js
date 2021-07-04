@@ -1,25 +1,39 @@
+const MIN_PRICE_FOR_APARTMENT_TYPE = {
+  'palace':'10000',
+  'flat':'1000',
+  'house':'5000',
+  'bungalow':'0',
+  'hotel':'3000',
+};
+
 const form = document.querySelector ('.ad-form');
 const titleInput = form.querySelector ('input[name="title"]');
 const priceInput = form.querySelector ('input[name="price"]');
+const apartmentTypeInput = form.querySelector ('select[name="type"]');
 const roomsInput = form.querySelector ('select[name="rooms"]');
 const capacityInput = form.querySelector ('select[name="capacity"]');
 const capacityElements = capacityInput.querySelectorAll ('option');
+const checkIn = form.querySelector ('select[name="timein"]');
+const checkInElenemts = checkIn.querySelectorAll ('option');
+const checkOut = form.querySelector ('select[name="timeout"]');
+const checkOutElenemts = checkOut.querySelectorAll ('option');
 
 titleInput.addEventListener ('input', () => {
-  if (titleInput.validity.tooShort) {
-    titleInput.setCustomValidity (`Заголовок объявления должен состоять не менее чем из 30 символов. Число символов равно ${titleInput.value.length}.`);
-  } else {
-    titleInput.setCustomValidity ('');
-  }
   titleInput.reportValidity();
 });
 
+const setUpMinPrice = () => {
+  const minPrice = +MIN_PRICE_FOR_APARTMENT_TYPE[apartmentTypeInput.value];
+  priceInput.min = minPrice;
+  priceInput.placeholder = minPrice;
+};
+
+setUpMinPrice ();
+apartmentTypeInput.addEventListener ('change', () => {
+  setUpMinPrice ();
+});
+
 priceInput.addEventListener ('input', () => {
-  if (priceInput.validity.rangeOverflow) {
-    priceInput.setCustomValidity (`Максимальная цена за ночь не может превышать данного значения ${priceInput.max}`);
-  } else {
-    priceInput.setCustomValidity ('');
-  }
   priceInput.reportValidity();
 });
 
@@ -55,3 +69,26 @@ const onChoiceNumberOfRooms = () => {
 };
 
 roomsInput.addEventListener('click', onChoiceNumberOfRooms);
+
+const connectTime = (values, elementsTime) => {
+  switch (values){
+    case '12:00':
+      elementsTime[0].selected = true;
+      break;
+    case '13:00':
+      elementsTime[1].selected = true;
+      break;
+    case '14:00':
+      elementsTime[2].selected = true;
+      break;
+  }
+};
+const onChangeCheckinToCheckout = () => {
+  connectTime(checkIn.value, checkOutElenemts);
+};
+const onChangeCheckoutToCheckin = () => {
+  connectTime(checkOut.value, checkInElenemts);
+};
+
+checkIn.addEventListener('change', onChangeCheckinToCheckout);
+checkOut.addEventListener('change', onChangeCheckoutToCheckin);
