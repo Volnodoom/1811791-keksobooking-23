@@ -2,9 +2,8 @@ const form = document.querySelector ('.ad-form');
 const titleInput = form.querySelector ('input[name="title"]');
 const priceInput = form.querySelector ('input[name="price"]');
 const roomsInput = form.querySelector ('select[name="rooms"]');
-const roomsElements = roomsInput.querySelectorAll('option');
 const capacityInput = form.querySelector ('select[name="capacity"]');
-const capacityElements = capacityInput.querySelectorAll('option');
+const capacityElements = capacityInput.querySelectorAll ('option');
 
 titleInput.addEventListener ('input', () => {
   if (titleInput.validity.tooShort) {
@@ -24,40 +23,35 @@ priceInput.addEventListener ('input', () => {
   priceInput.reportValidity();
 });
 
-const connectCapacityWithRooms = function () {
-  capacityInput.addEventListener ('change', () => {
-
-    for (const capacityElement of capacityElements) {
-      capacityElement.setAttribute ('disabled','');}
-
-    switch (roomsElements) {
-      case 'roomsElements[0]':
-        capacityElements[2].removeAttribute ('disabled');
-        break;
-      case 'roomsElements[1]':
-        capacityElements[2].removeAttribute ('disabled');
-        capacityElements[1].removeAttribute ('disabled');
-        break;
-      case 'roomsElements[2]':
-        capacityElements[2].removeAttribute ('disabled');
-        capacityElements[1].removeAttribute ('disabled');
-        capacityElements[0].removeAttribute ('disabled');
-        break;
-      case 'roomsElements[3]':
-        capacityElements[3].removeAttribute ('disabled');
-        break;
-    }
-  });
+const setDisabledValue = (elements, values) => {
+  for (let item = 0; item < elements.length; item++) {
+    elements[item].disabled = values.indexOf(elements[item].value) > -1;
+  }
 };
-connectCapacityWithRooms();
 
-let capacityTextContent;
-for (const capacityElement of capacityElements) {
-  capacityTextContent += `${capacityElement.textContent},`;
-}
-const arrayOfCapacity = capacityTextContent.split(',').pop();
+const roomsInputAndCapacity = () => {
+  switch (roomsInput.value) {
+    case '1':
+      setDisabledValue (capacityElements, ['3', '2', '0']);
+      capacityElements[2].selected = true;
+      break;
+    case '2':
+      setDisabledValue (capacityElements, ['3', '0']);
+      capacityElements[1].selected = true;
+      break;
+    case '3':
+      setDisabledValue(capacityElements, ['0']);
+      capacityElements[0].selected = true;
+      break;
+    case '100':
+      setDisabledValue(capacityElements, ['3', '2', '1']);
+      capacityElements[3].selected = true;
+      break;
+  }
+};
 
-console.log (arrayOfCapacity);
+const onChoiceNumberOfRooms = () => {
+  roomsInputAndCapacity();
+};
 
-
-
+roomsInput.addEventListener('click', onChoiceNumberOfRooms);
