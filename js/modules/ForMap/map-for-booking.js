@@ -29,10 +29,10 @@ L.tileLayer(
 
 //Main Pin Marker
 const mainPinIcon = L.icon ({
-  iconUrl: '../../../img/ForMap/marker-icon.png',
+  iconUrl: 'img/ForMap/marker-icon.png',
   iconSize: [52,52],
   iconAnchor: [26,52],
-  shadowAnchor: '../../../img/ForMap/marker-shadow.png',
+  shadowAnchor: 'img/ForMap/marker-shadow.png',
 });
 
 const mainPinMarker = L.marker (START_OF_COORDINATES, {draggable: true, icon: mainPinIcon});
@@ -49,10 +49,10 @@ mainPinMarker.on ('moveend', (evt) => {
 
 //design Adv markers
 const typicalAdvIcon = L.icon ({
-  iconUrl: '../../../img/pin.svg',
+  iconUrl: 'img/pin.svg',
   iconSize: [40,40],
   iconAnchor: [20,40],
-  shadowAnchor: '../../../img/ForMap/marker-shadow.png',
+  shadowAnchor: 'img/ForMap/marker-shadow.png',
 });
 
 temptArray.forEach((element) => {
