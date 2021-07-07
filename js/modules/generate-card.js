@@ -1,10 +1,9 @@
 import {TITLE, TYPE_OF_APARTMENT, TIMES, FEATURES_OF_APARTMENT, DESCRIPTION, PHOTOS_DATA} from './data.js';
-import {getRandomAvatar, getRandomPositiveInteger, getRandomItemRepeat, getRandomLength} from './get-random.js';
-import {LAT, LNG} from './location-lat-lng.js';
+import {getRandomAvatar, getRandomPositiveInteger, getRandomItemRepeat, getRandomLength, getRandomPositiveFloat} from './get-random.js';
 
 const creatAvailableApartment = function () {
-  LAT;
-  LNG;
+  const LAT = getRandomPositiveFloat (35.65000, 35.70000,5);
+  const LNG = getRandomPositiveFloat (139.70000,139.80000,5);
 
   return {
     author : {

@@ -1,5 +1,3 @@
-import {temptArray} from './generate-card.js';
-
 const COMPARISON_ENGLISH_WITH_RUSSIAN = {
   flat: 'Квартира',
   bungalow: 'Бунгало',
@@ -8,17 +6,13 @@ const COMPARISON_ENGLISH_WITH_RUSSIAN = {
   hotel: 'Отель',
 };
 
-const randomData = temptArray;
 const advertisementTemplate = document.querySelector ('#card').content.querySelector ('.popup');
-const mapCanvas = document.querySelector ('#map-canvas');
 
 const compareWithRightName = function (englishNameOfApart) {
   return COMPARISON_ENGLISH_WITH_RUSSIAN [englishNameOfApart];
 };
 
-const similarListFragment = document.createDocumentFragment ();
-
-randomData.forEach ((advData) => {
+const createCustomPopup = (advData) => {
   const advElement = advertisementTemplate.cloneNode(true);
 
   if (advData.author.avatar) {
@@ -33,11 +27,7 @@ randomData.forEach ((advData) => {
     advElement.querySelector ('.popup__title').classList.add ('visually-hidden');
   }
 
-  if (advData.offer.address) {
-    advElement.querySelector ('.popup__text--address').textContent = advData.offer.address;
-  } else {
-    advElement.querySelector ('.popup__text--address').classList.add ('visually-hidden');
-  }
+  advElement.querySelector ('.popup__text--address').classList.add ('visually-hidden');
 
   if (advData.offer.price) {
     advElement.querySelector ('.popup__text--price').textContent = `${advData.offer.price} ₽/ночь`;
@@ -91,7 +81,6 @@ randomData.forEach ((advData) => {
   } else {
     advElement.querySelector ('.popup__photos').classList.add ('visually-hidden');
   }
-  similarListFragment.appendChild(advElement);
-});
-
-mapCanvas.appendChild (similarListFragment.firstChild);
+  return advElement;
+};
+export {createCustomPopup};

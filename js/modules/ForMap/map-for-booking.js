@@ -1,5 +1,6 @@
 import {activePageState, inactivePageState} from '../page-status.js';
 import {temptArray} from '../generate-card.js';
+import {createCustomPopup} from './adv-info-for-popup.js';
 
 const START_OF_COORDINATES = {
   lat: 35.68950,
@@ -54,16 +55,24 @@ const typicalAdvIcon = L.icon ({
   shadowAnchor: '../../../img/ForMap/marker-shadow.png',
 });
 
+temptArray.forEach((element) => {
 
-const typicalAdvMarker = L.marker (
-  {
-    lat: temptArray[0].location.lat,
-    lng: temptArray[0].location.lng,
-  },
-  {
-    icon: typicalAdvIcon,
-  });
-typicalAdvMarker.addTo(map);
 
-//console.log (`${temptArray[7].location.lat}, ${temptArray[7].location.lng}`);
-//console.log (temptArray);
+  const typicalAdvMarker = L.marker (
+    {
+      lat: element.location.lat,
+      lng: element.location.lng,
+    },
+    {
+      icon: typicalAdvIcon,
+    });
+  typicalAdvMarker
+    .addTo(map)
+    .bindPopup(
+      createCustomPopup (element),
+      {
+        keepInView: true,
+      },
+    );
+});
+
