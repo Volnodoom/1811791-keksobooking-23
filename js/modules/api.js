@@ -1,4 +1,4 @@
-import {showAlert} from './alert.js';
+import {showAlert} from './serverMessages.js';
 
 const getData = (onSuccess) => {
   fetch ('https://23.javascript.pages.academy/keksobooking/data')
@@ -13,4 +13,18 @@ const getData = (onSuccess) => {
     });
 };
 
-export {getData};
+const sendData = (onSuccess, onFail, body) => {
+  fetch ('https://23.javascript.pages.academy/keksobooking',
+    {
+      method: 'POST',
+      body,
+    },
+  )
+    .then ((response) => {
+      if (response.ok) {return onSuccess ();}
+      else {onFail ();}
+    })
+    .catch (() => {onFail ();});
+};
+
+export {getData, sendData};
