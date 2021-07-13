@@ -1,11 +1,12 @@
-// const isEscEvent = (evt) => {
-//   return evt.key === 'Escape' || evt.key === 'Esc' || evt.keyCode === 27;
-// };
+// eslint-disable-next-line arrow-body-style
+const isEscEvent = (evt) => {
+  return evt.key === 'Escape' || evt.key === 'Esc' || evt.keyCode === 27;
+};
 
 // eslint-disable-next-line no-use-before-define
 const onClickForSuccess = () => {hideSuccess ();};
 // eslint-disable-next-line no-use-before-define
-const onEscKeydownForSuccess = (evt) => {if (evt.key === 'Escape') {hideSuccess ();}};
+const onEscKeydownForSuccess = (evt) => {if (isEscEvent) {hideSuccess ();}};
 
 const hideSuccess = () => {
   document.querySelector ('.success').remove();
@@ -25,7 +26,7 @@ const showSuccess = () => {
 // eslint-disable-next-line no-use-before-define
 const onClickForError = () => {hideError ();};
 // eslint-disable-next-line no-use-before-define
-const onEscKeydownForError = (evt) => {if (evt.key === 'Escape') {hideError ();}};
+const onEscKeydownForError = (evt) => {if (isEscEvent) {hideError ();}};
 
 const hideError = () => {
   document.querySelector ('.error').remove();
