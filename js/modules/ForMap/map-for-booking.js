@@ -14,6 +14,7 @@ const addressAdv = form.querySelector ('#address');
 inactivePageState ();
 addressAdv.addEventListener ('click', () => {addressAdv.disabled = true;});
 addressAdv.addEventListener ('focus', () => {addressAdv.disabled = true;});
+addressAdv.defaultValue = `${START_OF_COORDINATES.lat.toFixed(5)}, ${START_OF_COORDINATES.lng}`;
 
 const map = L.map ('map-canvas')
   .on('load', () => {activePageState ();})

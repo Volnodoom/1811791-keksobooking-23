@@ -26,6 +26,11 @@ titleInput.addEventListener ('input', () => {
   titleInput.reportValidity();
 });
 
+//////////delete
+titleInput.value = '1111111111111111111111111111111111111';
+priceInput.value = '1004';
+
+
 const setUpMinPrice = () => {
   const minPrice = +MIN_PRICE_FOR_APARTMENT_TYPE[apartmentTypeInput.value];
   priceInput.min = minPrice;

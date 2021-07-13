@@ -43,6 +43,4 @@ const showError = () => {
   body.querySelector ('.error__button').focus ();
 };
 
-
 export {showSuccess, showError};
-
