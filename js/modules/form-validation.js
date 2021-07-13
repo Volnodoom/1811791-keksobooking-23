@@ -1,3 +1,7 @@
+import {sendData} from './api.js';
+import {showSuccess, showError} from './popup-on-submit.js';
+import {setStartViewOnClick} from './ForMap/map-for-booking.js';
+
 const MIN_PRICE_FOR_APARTMENT_TYPE = {
   'palace':'10000',
   'flat':'1000',
@@ -21,6 +25,11 @@ const checkOutElenemts = checkOut.querySelectorAll ('option');
 titleInput.addEventListener ('input', () => {
   titleInput.reportValidity();
 });
+
+//////////delete
+titleInput.value = '1111111111111111111111111111111111111';
+priceInput.value = '1004';
+
 
 const setUpMinPrice = () => {
   const minPrice = +MIN_PRICE_FOR_APARTMENT_TYPE[apartmentTypeInput.value];
@@ -92,3 +101,15 @@ const onChangeCheckoutToCheckin = () => {
 
 checkIn.addEventListener('change', onChangeCheckinToCheckout);
 checkOut.addEventListener('change', onChangeCheckoutToCheckin);
+
+form.addEventListener ('submit', (evt) => {
+  evt.preventDefault ();
+
+  sendData (
+    () => {showSuccess ();
+      setStartViewOnClick(document);},
+    () => {showError ();},
+    new FormData (evt.target),
+  );
+});
+

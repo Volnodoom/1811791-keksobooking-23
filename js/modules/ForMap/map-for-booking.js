@@ -1,5 +1,5 @@
 import {activePageState, inactivePageState} from '../page-status.js';
-import {temptArray} from '../generate-card.js';
+import {getData} from '../api.js';
 import {createCustomPopup} from './adv-info-for-popup.js';
 
 const START_OF_COORDINATES = {
@@ -11,10 +11,10 @@ const form = document.querySelector ('.ad-form');
 const resetButton = form.querySelector ('.ad-form__reset');
 const addressAdv = form.querySelector ('#address');
 
-//set the initial map
 inactivePageState ();
-addressAdv.value = `${START_OF_COORDINATES.lat.toFixed(5)}, ${START_OF_COORDINATES.lng}`;
-addressAdv.addEventListener('click', () => {addressAdv.disabled = true;});
+addressAdv.addEventListener ('click', () => {addressAdv.disabled = true;});
+addressAdv.addEventListener ('focus', () => {addressAdv.disabled = true;});
+addressAdv.defaultValue = `${START_OF_COORDINATES.lat.toFixed(5)}, ${START_OF_COORDINATES.lng}`;
 
 const map = L.map ('map-canvas')
   .on('load', () => {activePageState ();})
@@ -38,10 +38,20 @@ const mainPinIcon = L.icon ({
 const mainPinMarker = L.marker (START_OF_COORDINATES, {draggable: true, icon: mainPinIcon});
 mainPinMarker.addTo(map);
 
-resetButton.addEventListener('click', ()=> {
-  mainPinMarker.setLatLng (START_OF_COORDINATES);
-  map.setView(START_OF_COORDINATES, 16);
+document.addEventListener('click', () => {
+  if (addressAdv.value === '') {
+    addressAdv.value = `${START_OF_COORDINATES.lat.toFixed(5)}, ${START_OF_COORDINATES.lng}`;
+  }
 });
+
+const setStartViewOnClick = (domElement) => {
+  domElement.addEventListener('click', ()=> {
+    mainPinMarker.setLatLng (START_OF_COORDINATES);
+    map.setView(START_OF_COORDINATES, 16);
+  });
+};
+
+setStartViewOnClick (resetButton);
 
 mainPinMarker.on ('moveend', (evt) => {
   addressAdv.value = `${evt.target.getLatLng ().lat.toFixed(5)}, ${evt.target.getLatLng ().lng.toFixed(5)}`;
@@ -55,24 +65,26 @@ const typicalAdvIcon = L.icon ({
   shadowAnchor: 'img/ForMap/marker-shadow.png',
 });
 
-temptArray.forEach((element) => {
-
-
-  const typicalAdvMarker = L.marker (
-    {
-      lat: element.location.lat,
-      lng: element.location.lng,
-    },
-    {
-      icon: typicalAdvIcon,
-    });
-  typicalAdvMarker
-    .addTo(map)
-    .bindPopup(
-      createCustomPopup (element),
+getData((advData) => {
+  advData.forEach((element) => {
+    const typicalAdvMarker = L.marker (
       {
-        keepInView: true,
+        lat: element.location.lat,
+        lng: element.location.lng,
       },
-    );
+      {
+        icon: typicalAdvIcon,
+      });
+    typicalAdvMarker
+      .addTo(map)
+      .bindPopup(
+        createCustomPopup (element),
+        {
+          keepInView: true,
+        },
+      );
+  });
 });
+
+export {setStartViewOnClick};
 
