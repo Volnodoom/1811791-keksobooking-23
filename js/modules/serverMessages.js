@@ -24,4 +24,3 @@ const showAlert = (message) => {
 };
 
 export {showAlert};
-

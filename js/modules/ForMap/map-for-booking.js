@@ -11,10 +11,9 @@ const form = document.querySelector ('.ad-form');
 const resetButton = form.querySelector ('.ad-form__reset');
 const addressAdv = form.querySelector ('#address');
 
-//set the initial map
 inactivePageState ();
-addressAdv.value = `${START_OF_COORDINATES.lat.toFixed(5)}, ${START_OF_COORDINATES.lng}`;
-addressAdv.addEventListener('click', () => {addressAdv.disabled = true;});
+addressAdv.addEventListener ('click', () => {addressAdv.disabled = true;});
+addressAdv.addEventListener ('focus', () => {addressAdv.disabled = true;});
 
 const map = L.map ('map-canvas')
   .on('load', () => {activePageState ();})
@@ -38,10 +37,20 @@ const mainPinIcon = L.icon ({
 const mainPinMarker = L.marker (START_OF_COORDINATES, {draggable: true, icon: mainPinIcon});
 mainPinMarker.addTo(map);
 
-resetButton.addEventListener('click', ()=> {
-  mainPinMarker.setLatLng (START_OF_COORDINATES);
-  map.setView(START_OF_COORDINATES, 16);
+document.addEventListener('click', () => {
+  if (addressAdv.value === '') {
+    addressAdv.value = `${START_OF_COORDINATES.lat.toFixed(5)}, ${START_OF_COORDINATES.lng}`;
+  }
 });
+
+const setStartViewOnClick = (domElement) => {
+  domElement.addEventListener('click', ()=> {
+    mainPinMarker.setLatLng (START_OF_COORDINATES);
+    map.setView(START_OF_COORDINATES, 16);
+  });
+};
+
+setStartViewOnClick (resetButton);
 
 mainPinMarker.on ('moveend', (evt) => {
   addressAdv.value = `${evt.target.getLatLng ().lat.toFixed(5)}, ${evt.target.getLatLng ().lng.toFixed(5)}`;
@@ -75,4 +84,6 @@ getData((advData) => {
       );
   });
 });
+
+export {setStartViewOnClick};
 

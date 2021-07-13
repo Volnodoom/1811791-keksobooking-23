@@ -1,5 +1,6 @@
 import {sendData} from './api.js';
-import {showErrorOnSubmitting, showSuccessOnSubmitting} from './buttons-on-submit.js';
+import {showSuccess, showError} from './popup-on-submit.js';
+import {setStartViewOnClick} from './ForMap/map-for-booking.js';
 
 const MIN_PRICE_FOR_APARTMENT_TYPE = {
   'palace':'10000',
@@ -20,12 +21,6 @@ const checkIn = form.querySelector ('select[name="timein"]');
 const checkInElenemts = checkIn.querySelectorAll ('option');
 const checkOut = form.querySelector ('select[name="timeout"]');
 const checkOutElenemts = checkOut.querySelectorAll ('option');
-
-//// delete
-titleInput.value = '1111111111111111111111111111111111111111';
-priceInput.value = '1006';
-const add = 'add';
-const remove = 'remove';
 
 titleInput.addEventListener ('input', () => {
   titleInput.reportValidity();
@@ -104,12 +99,12 @@ checkOut.addEventListener('change', onChangeCheckoutToCheckin);
 
 form.addEventListener ('submit', (evt) => {
   evt.preventDefault ();
-  showSuccessOnSubmitting (add);
+
   sendData (
-    () => {
-      //showSuccessOnSubmitting (remove);
-    },
-    () => showErrorOnSubmitting (),
+    () => {showSuccess ();
+      setStartViewOnClick(document);},
+    () => {showError ();},
     new FormData (evt.target),
   );
 });
+
