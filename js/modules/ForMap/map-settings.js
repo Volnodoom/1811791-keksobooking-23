@@ -87,14 +87,14 @@ const mapLoading = L.tileLayer(
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   },
 );
-mapLoading.addTo(map);
-
-map.on ('load', () => {
-  activateFormAdv ();
-  if (!contentsAdvInput.disabled) {
-    setTypicalAdvMarkerOnMap (() => activateMapFilters ());
-  }
-});
+mapLoading
+  .addTo(map)
+  .on ('load', () => {
+    activateFormAdv ();
+    if (!contentsAdvInput.disabled) {
+      setTypicalAdvMarkerOnMap (() => activateMapFilters ());
+    }
+  });
 
 export {setStartViewOnClick};
 

@@ -1,6 +1,6 @@
 import {sendData} from './api.js';
 import {showSuccess, showError} from './popup-on-submit.js';
-import {setStartViewOnClick} from './ForMap/map-for-booking.js';
+import {setStartViewOnClick} from './ForMap/map-settings.js';
 
 const MIN_PRICE_FOR_APARTMENT_TYPE = {
   'palace':'10000',
