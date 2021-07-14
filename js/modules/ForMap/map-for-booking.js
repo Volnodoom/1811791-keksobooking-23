@@ -1,4 +1,4 @@
-import {activePageState, inactivePageState} from '../page-status.js';
+import {deactivateFormAdv, deactivateMapFilters, activateFormAdv, activateMapFilters} from '../page-status.js';
 import {getData} from '../api.js';
 import {createCustomPopup} from './adv-info-for-popup.js';
 
@@ -10,22 +10,17 @@ const START_OF_COORDINATES = {
 const form = document.querySelector ('.ad-form');
 const resetButton = form.querySelector ('.ad-form__reset');
 const addressAdv = form.querySelector ('#address');
+const contentsAdvInput = form.querySelectorAll ('input');
 
-inactivePageState ();
 addressAdv.addEventListener ('click', () => {addressAdv.disabled = true;});
 addressAdv.addEventListener ('focus', () => {addressAdv.disabled = true;});
 addressAdv.defaultValue = `${START_OF_COORDINATES.lat.toFixed(5)}, ${START_OF_COORDINATES.lng}`;
 
-const map = L.map ('map-canvas')
-  .on('load', () => {activePageState ();})
-  .setView(START_OF_COORDINATES, 12);
+deactivateFormAdv ();
+deactivateMapFilters ();
 
-L.tileLayer(
-  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(map);
+const map = L.map ('map-canvas')
+  .setView(START_OF_COORDINATES, 12);
 
 //Main Pin Marker
 const mainPinIcon = L.icon ({
@@ -65,25 +60,40 @@ const typicalAdvIcon = L.icon ({
   shadowAnchor: 'img/ForMap/marker-shadow.png',
 });
 
-getData((advData) => {
-  advData.forEach((element) => {
-    const typicalAdvMarker = L.marker (
-      {
-        lat: element.location.lat,
-        lng: element.location.lng,
-      },
-      {
-        icon: typicalAdvIcon,
-      });
-    typicalAdvMarker
-      .addTo(map)
-      .bindPopup(
-        createCustomPopup (element),
+const setTypicalAdvMarkerOnMap = (cb) => {
+  getData((advData) => {
+    advData.forEach((element) => {
+      const typicalAdvMarker = L.marker (
         {
-          keepInView: true,
+          lat: element.location.lat,
+          lng: element.location.lng,
         },
+        {icon: typicalAdvIcon},
       );
+      typicalAdvMarker
+        .addTo(map)
+        .bindPopup(
+          createCustomPopup (element),
+          {keepInView: true},
+        );
+    });
   });
+  cb ();
+};
+
+const mapLoading = L.tileLayer(
+  'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  },
+);
+mapLoading.addTo(map);
+
+map.on ('load', () => {
+  activateFormAdv ();
+  if (!contentsAdvInput.disabled) {
+    setTypicalAdvMarkerOnMap (() => activateMapFilters ());
+  }
 });
 
 export {setStartViewOnClick};

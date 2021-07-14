@@ -6,7 +6,7 @@ const isEscEvent = (evt) => {
 // eslint-disable-next-line no-use-before-define
 const onClickForSuccess = () => {hideSuccess ();};
 // eslint-disable-next-line no-use-before-define
-const onEscKeydownForSuccess = (evt) => {if (isEscEvent) {hideSuccess ();}};
+const onEscKeydownForSuccess = (evt) => {if (isEscEvent(evt)) {hideSuccess ();}};
 
 const hideSuccess = () => {
   document.querySelector ('.success').remove();
@@ -26,7 +26,7 @@ const showSuccess = () => {
 // eslint-disable-next-line no-use-before-define
 const onClickForError = () => {hideError ();};
 // eslint-disable-next-line no-use-before-define
-const onEscKeydownForError = (evt) => {if (isEscEvent) {hideError ();}};
+const onEscKeydownForError = (evt) => {if (isEscEvent(evt)) {hideError ();}};
 
 const hideError = () => {
   document.querySelector ('.error').remove();
