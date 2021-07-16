@@ -19,30 +19,30 @@ const setOperational = (contents) => {
   }
 };
 
-const inactivePageState = () => {
+const deactivateFormAdv = () => {
   formAdv.classList.add ('ad-form--disabled');
   setDisabled (contentsAdvInput);
   setDisabled (contentsAdvSelect);
   setDisabled (contentsAdvButton);
+};
 
+const deactivateMapFilters = () => {
   formMapFilter.classList.add ('ad-form--disabled');
   setDisabled (contentMapInput);
   setDisabled (contentMapSelect);
 };
 
-inactivePageState();
-
-const activePageState = () => {
+const activateFormAdv = () => {
   formAdv.classList.remove ('ad-form--disabled');
   setOperational (contentsAdvInput);
   setOperational (contentsAdvSelect);
   setOperational (contentsAdvButton);
+};
 
+const activateMapFilters = () => {
   formMapFilter.classList.remove ('ad-form--disabled');
   setOperational (contentMapInput);
   setOperational (contentMapSelect);
 };
 
-activePageState();
-
-export {inactivePageState, activePageState};
+export {deactivateFormAdv, deactivateMapFilters, activateFormAdv, activateMapFilters};
