@@ -97,14 +97,17 @@ const onChangeCheckoutToCheckin = () => {
 checkIn.addEventListener('change', onChangeCheckinToCheckout);
 checkOut.addEventListener('change', onChangeCheckoutToCheckin);
 
-form.addEventListener ('submit', (evt) => {
-  evt.preventDefault ();
+const setUserFormSubmit = () => {
+  form.addEventListener ('submit', (evt) => {
+    evt.preventDefault ();
 
-  sendData (
-    () => {showSuccess ();
-      setStartViewOnClick(document);},
-    () => {showError ();},
-    new FormData (evt.target),
-  );
-});
+    sendData (
+      () => {showSuccess ();
+        setStartViewOnClick(document);},
+      () => {showError ();},
+      new FormData (evt.target),
+    );
+  });
+};
 
+export {setUserFormSubmit};

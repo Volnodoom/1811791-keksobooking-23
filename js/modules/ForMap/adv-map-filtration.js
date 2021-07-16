@@ -13,48 +13,45 @@ const housingType = container.querySelector ('#housing-type');
 const housingPrice = container.querySelector ('#housing-price');
 const housingRooms = container.querySelector ('#housing-rooms');
 const housingGuests = container.querySelector ('#housing-guests');
-const housingFeatures = container.querySelector ('#housing-features').querySelectorAll ('[name="features:checked"]');
 
 /// ----> filtration conditions
 const filtrateHousingType = (card) => {
   if (housingType.value === DEFAULT_SELECTION) {
     return true;
-  } housingType.value === card.offer.type;
+  } return housingType.value === card.offer.type;
 };
 
 const filtrateHousingRooms = (card) => {
   if (housingRooms.value === DEFAULT_SELECTION) {
     return true;
-  } parseInt(housingRooms.value,NUMERAL_SYSTEM) === card.offer.rooms;
+  } return parseInt(housingRooms.value,NUMERAL_SYSTEM) === card.offer.rooms;
 };
 
 const filtrateHousingGuests = (card) => {
   if (housingGuests.value === DEFAULT_SELECTION) {
     return true;
-  } parseInt (housingGuests.value,NUMERAL_SYSTEM) === card.offer.guests;
+  } return parseInt (housingGuests.value,NUMERAL_SYSTEM) === card.offer.guests;
 };
 
 const filtrateHousingPrice = (card) => {
   switch (housingPrice.value) {
     case 'low':
-      card.offer.price < priceRestrictions.low;
-      break;
+      return card.offer.price < priceRestrictions.low;
     case 'middle':
-      (card.offer.price >= priceRestrictions.low) && (card.offer.price <= priceRestrictions.high);
-      break;
+      return (card.offer.price >= priceRestrictions.low) && (card.offer.price <= priceRestrictions.high);
     case 'high':
-      card.offer.price > priceRestrictions.high;
-      break;
+      return card.offer.price > priceRestrictions.high;
     default:
-      true;
-      break;
+      return true;
   }
 };
 
 const filtrateHousingFeatures = (card) => {
-  Array.from(housingFeatures).every((checkedFeature) => {
+  const housingFeatures = container.querySelector ('#housing-features').querySelectorAll ('[name="features:checked"]');
+
+  return Array.from(housingFeatures).every((checkedFeature) => {
     if (card.offer.features) {
-      card.offer.features.includes(checkedFeature.value);
+      return card.offer.features.includes(checkedFeature.value);
     }
   });
 };
@@ -69,33 +66,9 @@ const filtrateOfAdvs = (advData) => {
 };
 
 const onChangeFiltrate = (cb) => {
-  container.addEventListener ('changes', () => {
+  container.addEventListener ('change', () => {
     cb ();
   });
 };
 
 export {filtrateOfAdvs, onChangeFiltrate};
-
-
-// const getAdvRank = () => {
-//   let rank = 0;
-
-//   if (!(housingType.value === 'any')) {rank += 1;}
-//   if (!(housingPrice.value === 'any')) {rank += 1;}
-//   if (!(housingRooms.value === 'any')) {rank += 1;}
-//   if (!(housingGuests.value === 'any')) {rank += 1;}
-//   if (housingFeatures[0].checked) {rank += 1;}
-//   if (housingFeatures[1].checked) {rank += 1;}
-//   if (housingFeatures[2].checked) {rank += 1;}
-//   if (housingFeatures[3].checked) {rank += 1;}
-//   if (housingFeatures[4].checked) {rank += 1;}
-//   if (housingFeatures[5].checked) {rank += 1;}
-
-//   return rank;
-// };
-
-// const compareAdvs = (adv1, adv2) => {
-//   const rankA = getAdvRank(adv1);
-//   const rankB = getAdvRank (adv2);
-//   return rankB - rankA;
-// };
