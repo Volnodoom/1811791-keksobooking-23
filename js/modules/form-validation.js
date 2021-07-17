@@ -1,6 +1,7 @@
 import {sendData} from './api.js';
 import {showSuccess, showError} from './popup-on-submit.js';
-import {setStartViewOnClick} from './ForMap/map-settings.js';
+import {setStartViewOnMap} from './ForMap/map-settings.js';
+import {resetImages} from './upload-photo.js';
 
 const MIN_PRICE_FOR_APARTMENT_TYPE = {
   'palace':'10000',
@@ -21,6 +22,7 @@ const checkIn = form.querySelector ('select[name="timein"]');
 const checkInElenemts = checkIn.querySelectorAll ('option');
 const checkOut = form.querySelector ('select[name="timeout"]');
 const checkOutElenemts = checkOut.querySelectorAll ('option');
+const resetButton = form.querySelector ('.ad-form__reset');
 
 titleInput.addEventListener ('input', () => {
   titleInput.reportValidity();
@@ -103,11 +105,19 @@ const setUserFormSubmit = () => {
 
     sendData (
       () => {showSuccess ();
-        setStartViewOnClick(document);},
+        setStartViewOnMap();},
       () => {showError ();},
       new FormData (evt.target),
     );
   });
 };
 
-export {setUserFormSubmit};
+const setUserFormReset = () => {
+  resetButton.addEventListener ('click', () => {
+    resetImages();
+    setStartViewOnMap();
+  });
+};
+setUserFormReset();
+
+export {setUserFormSubmit, setUserFormReset};

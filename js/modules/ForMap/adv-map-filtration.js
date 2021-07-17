@@ -3,7 +3,7 @@ import {createAdvMarker, clearMap} from './map-settings.js';
 const FIXED_NUMBER_OF_ADV = 10;
 const NUMERAL_SYSTEM = 10;
 const DEFAULT_SELECTION = 'any';
-const priceRestrictions = {
+const PRICE_RESTRICTION = {
   low : '10000',
   high: '50000',
 };
@@ -36,18 +36,18 @@ const filtrateHousingGuests = (card) => {
 const filtrateHousingPrice = (card) => {
   switch (housingPrice.value) {
     case 'low':
-      return card.offer.price < priceRestrictions.low;
+      return card.offer.price < PRICE_RESTRICTION.low;
     case 'middle':
-      return (card.offer.price >= priceRestrictions.low) && (card.offer.price <= priceRestrictions.high);
+      return (card.offer.price >= PRICE_RESTRICTION.low) && (card.offer.price <= PRICE_RESTRICTION.high);
     case 'high':
-      return card.offer.price > priceRestrictions.high;
+      return card.offer.price > PRICE_RESTRICTION.high;
     default:
       return true;
   }
 };
 
 const filtrateHousingFeatures = (card) => {
-  const housingFeatures = container.querySelector ('#housing-features').querySelectorAll ('[name="features:checked"]');
+  const housingFeatures = container.querySelector ('#housing-features').querySelectorAll ('[name="features"]:checked');
 
   return Array.from(housingFeatures).every((checkedFeature) => {
     if (card.offer.features) {

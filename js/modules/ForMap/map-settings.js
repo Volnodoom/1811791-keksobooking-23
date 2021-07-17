@@ -7,9 +7,7 @@ const START_OF_COORDINATES = {
 };
 
 const form = document.querySelector ('.ad-form');
-const resetButton = form.querySelector ('.ad-form__reset');
 const addressAdv = form.querySelector ('#address');
-//const contentsAdvInput = form.querySelectorAll ('input');
 
 //--> Set up the page
 addressAdv.addEventListener ('click', () => {addressAdv.disabled = true;});
@@ -40,14 +38,10 @@ const mainPinIcon = L.icon ({
 const mainPinMarker = L.marker (START_OF_COORDINATES, {draggable: true, icon: mainPinIcon});
 mainPinMarker.addTo (map);
 
-const setStartViewOnClick = (domElement) => {
-  domElement.addEventListener ('click', ()=> {
-    mainPinMarker.setLatLng (START_OF_COORDINATES);
-    map.setView (START_OF_COORDINATES, 16);
-  });
+const setStartViewOnMap = () => {
+  mainPinMarker.setLatLng (START_OF_COORDINATES);
+  map.setView (START_OF_COORDINATES, 16);
 };
-
-setStartViewOnClick (resetButton);
 
 mainPinMarker.on ('moveend', (evt) => {
   addressAdv.value = `${evt.target.getLatLng ().lat.toFixed(5)}, ${evt.target.getLatLng ().lng.toFixed(5)}`;
@@ -100,5 +94,5 @@ mapLoading.on ('load', () => {
   activateMapFilters ();
 });
 
-export {setStartViewOnClick, createCustomPopup, clearMap, createAdvMarker};
+export {setStartViewOnMap, createCustomPopup, clearMap, createAdvMarker};
 
