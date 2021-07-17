@@ -8,7 +8,6 @@ const START_OF_COORDINATES = {
 
 const form = document.querySelector ('.ad-form');
 const addressAdv = form.querySelector ('#address');
-//const contentsAdvInput = form.querySelectorAll ('input');
 
 //--> Set up the page
 addressAdv.addEventListener ('click', () => {addressAdv.disabled = true;});
